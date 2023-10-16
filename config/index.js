@@ -9,7 +9,7 @@ const DB_HOST = process.env.DB_HOST || 'localhost';
 const DB_PORT = process.env.DB_PORT || 5432;
 const DB_DATABASE = process.env.DB_DATABASE || 'expensesdb';
 const DB_USER = process.env.DB_USER || 'postgres';
-const DB_PASSWORD = process.env.DB_PASSWORD || 'sholly';
+const DB_PASSWORD = process.env.DB_PASSWORD || '';
 
 
 var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
