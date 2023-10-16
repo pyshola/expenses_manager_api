@@ -58,7 +58,79 @@ Run the application
 
 ## API Documentation
 
-The API documentation for this project can be found [here](https://documenter.getpostman.com/view/13392160/Tz5tZ6QJ)
+
+The API documentation for this project
+POST /api/users  -  should create a new user in Database and Generate API authentication key.
+      @required email =>String
+      @required password => String
+      @required name => String
+      @required phone => String
+      Return - API key: { "apiKey": "sk_36dbc50d-ed10-428e-9dc6-3b599552dbfd"} with a status code 201
+GET /api/connect - Regenerate API authentication key
+      @required email =>String
+      @required password => String
+      Return - API key: { "apiKey": "sk_36dbc50d-ed10-428e-9dc6-3a78thh778uhh4"} with a status code 200
+
+GET /api/disconnect   - sign-out the user based on the token:
+    @required - Autorization header X-Token, API key.
+    Return - delete the API key and return nothing with a status code 204
+  
+GET /api/users/me - retrieve the user base on the API key used
+    @required - Autorization header X-Token, API key.
+    Return - return the user object (name, phone, and email)
+
+POST /api/expensescategory - create a new expenses category in Database.
+    @required - Autorization header X-Token, API key.
+    @required - name => String
+    Return - return expensescategory object (id, and name)
+
+GET /api/expensescategory - retrieve all expenses category.
+    @required - Autorization header X-Token, API key.
+    Return - return array expensescategory object (id, and name)
+    
+PUT /api/expensescategory/:id - update a expenses category in Database based on ID.
+    @required - Autorization header X-Token, API key.
+    @required - id => expenses category id
+    @required - name => String
+    Return - return updated expensescategory object (id, and name)
+    
+DELETE /api/expensescategory/:id - delete a expenses category in Database based on ID.
+    @required - Autorization header X-Token, API key.
+    @required - id => request parameter
+    Return - return nothing with a status code 204
+    
+POST /api/expenses - create a new expense in Database.
+    @required - Autorization header X-Token, API key.
+    @required - amount => Number
+    @required - description => String
+    @required - category => Number | String (category id or name)
+                Create new expenses category if not exist
+    Return - return expenses object (id, amount, category, and description)
+    
+GET /api/expenses - retrieve all expenses between specify start and end date.
+    @required - Autorization header X-Token, API key.
+    Return - return array expenses object (id, amount, category, and description)
+    
+PUT /api/expenses/:id - update a expenses in Database based on ID.
+    @required - Autorization header X-Token, API key.
+    @required - id => expenses id
+    @required - amount => Number
+    @required - description => String
+    @required - category => Number | String (category id or name)
+                Create new expenses category if not exist
+                
+    Return - return updated expenses object (id, amount, category, and description)
+    
+DELETE /api/expenses/:id - delete a expenses in Database based on ID.
+    @required - Autorization header X-Token, API key.
+    @required - id => request parameter
+    Return - return nothing with a status code 204
+    
+GET /api/expenses/category - retrieve all expenses summarize by category between specify start and end date.
+    @required - Autorization header X-Token, API key.
+    Return - return expenses summary by category object (category and amount)
+
+
 
 ## Author
 
