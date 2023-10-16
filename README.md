@@ -60,75 +60,75 @@ Run the application
 
 
 The API documentation for this project
-POST /api/users  -  should create a new user in Database and Generate API authentication key.
-      @required email =>String
-      @required password => String
-      @required name => String
-      @required phone => String
-      Return - API key: { "apiKey": "sk_36dbc50d-ed10-428e-9dc6-3b599552dbfd"} with a status code 201
-GET /api/connect - Regenerate API authentication key
-      @required email =>String
-      @required password => String
-      Return - API key: { "apiKey": "sk_36dbc50d-ed10-428e-9dc6-3a78thh778uhh4"} with a status code 200
+POST /api/users  -  should create a new user in Database and Generate API authentication key.<br>
+      @required email =>String<br>
+      @required password => String<br>
+      @required name => String<br>
+      @required phone => String<br>
+      Return - API key: { "apiKey": "sk_36dbc50d-ed10-428e-9dc6-3b599552dbfd"} with a status code 201.<br>
+      
+GET /api/connect - Regenerate API authentication key<br>
+      @required email =>String<br>
+      @required password => String<br>
+      Return - API key: { "apiKey": "sk_36dbc50d-ed10-428e-9dc6-3a78thh778uhh4"} with a status code 200<br>
 
-GET /api/disconnect   - sign-out the user based on the token:
-    @required - Autorization header X-Token, API key.
-    Return - delete the API key and return nothing with a status code 204
+GET /api/disconnect   - sign-out the user based on the token:<br>
+    @required - Autorization header X-Token, API key.<br>
+    Return - delete the API key and return nothing with a status code 204<br>
   
-GET /api/users/me - retrieve the user base on the API key used
-    @required - Autorization header X-Token, API key.
-    Return - return the user object (name, phone, and email)
+GET /api/users/me - retrieve the user base on the API key used<br>
+    @required - Autorization header X-Token, API key.<br>
+    Return - return the user object (name, phone, and email)<br>
 
-POST /api/expensescategory - create a new expenses category in Database.
-    @required - Autorization header X-Token, API key.
-    @required - name => String
-    Return - return expensescategory object (id, and name)
+POST /api/expensescategory - create a new expenses category in Database.<br>
+    @required - Autorization header X-Token, API key.<br>
+    @required - name => String<br>
+    Return - return expensescategory object (id, and name)<br>
 
-GET /api/expensescategory - retrieve all expenses category.
-    @required - Autorization header X-Token, API key.
-    Return - return array expensescategory object (id, and name)
+GET /api/expensescategory - retrieve all expenses category.<br>
+    @required - Autorization header X-Token, API key.<br>
+    Return - return array expensescategory object (id, and name)<br>
     
-PUT /api/expensescategory/:id - update a expenses category in Database based on ID.
-    @required - Autorization header X-Token, API key.
-    @required - id => expenses category id
-    @required - name => String
-    Return - return updated expensescategory object (id, and name)
+PUT /api/expensescategory/:id - update a expenses category in Database based on ID.<br>
+    @required - Autorization header X-Token, API key.<br>
+    @required - id => expenses category id<br>
+    @required - name => String<br>
+    Return - return updated expensescategory object (id, and name)<br>
     
-DELETE /api/expensescategory/:id - delete a expenses category in Database based on ID.
-    @required - Autorization header X-Token, API key.
-    @required - id => request parameter
-    Return - return nothing with a status code 204
+DELETE /api/expensescategory/:id - delete a expenses category in Database based on ID.<br>
+    @required - Autorization header X-Token, API key.<br>
+    @required - id => request parameter<br>
+    Return - return nothing with a status code 204<br>
     
-POST /api/expenses - create a new expense in Database.
-    @required - Autorization header X-Token, API key.
-    @required - amount => Number
-    @required - description => String
-    @required - category => Number | String (category id or name)
-                Create new expenses category if not exist
-    Return - return expenses object (id, amount, category, and description)
+POST /api/expenses - create a new expense in Database.<br>
+    @required - Autorization header X-Token, API key.<br>
+    @required - amount => Number<br>
+    @required - description => String<br>
+    @required - category => Number | String (category id or name)<br>
+                Create new expenses category if not exist<br>
+    Return - return expenses object (id, amount, category, and description)<br>
     
-GET /api/expenses - retrieve all expenses between specify start and end date.
-    @required - Autorization header X-Token, API key.
-    Return - return array expenses object (id, amount, category, and description)
+GET /api/expenses - retrieve all expenses between specify start and end date.<br>
+    @required - Autorization header X-Token, API key.<br>
+    Return - return array expenses object (id, amount, category, and description)<br>
     
-PUT /api/expenses/:id - update a expenses in Database based on ID.
-    @required - Autorization header X-Token, API key.
-    @required - id => expenses id
-    @required - amount => Number
-    @required - description => String
-    @required - category => Number | String (category id or name)
-                Create new expenses category if not exist
-                
-    Return - return updated expenses object (id, amount, category, and description)
+PUT /api/expenses/:id - update a expenses in Database based on ID.<br>
+    @required - Autorization header X-Token, API key.<br>
+    @required - id => expenses id<br>
+    @required - amount => Number<br>
+    @required - description => String<br>
+    @required - category => Number | String (category id or name)<br>
+                Create new expenses category if not exist<br>                
+    Return - return updated expenses object (id, amount, category, and description)<br>
     
-DELETE /api/expenses/:id - delete a expenses in Database based on ID.
-    @required - Autorization header X-Token, API key.
-    @required - id => request parameter
-    Return - return nothing with a status code 204
+DELETE /api/expenses/:id - delete a expenses in Database based on ID.<br>
+    @required - Autorization header X-Token, API key.<br>
+    @required - id => request parameter<br>
+    Return - return nothing with a status code 204<br>
     
-GET /api/expenses/category - retrieve all expenses summarize by category between specify start and end date.
-    @required - Autorization header X-Token, API key.
-    Return - return expenses summary by category object (category and amount)
+GET /api/expenses/category - retrieve all expenses summarize by category between specify start and end date.<br>
+    @required - Autorization header X-Token, API key.<br>
+    Return - return expenses summary by category object (category and amount)<br>
 
 
 
