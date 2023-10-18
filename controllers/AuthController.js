@@ -108,7 +108,7 @@ class AuthController {
         error: 'Unauthorizeds',
       });
     }
-    console.log(token)
+    //console.log(token)
 
     const user = await User.findOne({where:{token:token, status:"Active"}});
     if (!user) { 

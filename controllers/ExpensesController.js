@@ -58,7 +58,7 @@ class ExpensesController {
             {where:query, include:[{model:ExpensesCategory, 
                  right:true}]});
         
-        console.log(expenses)
+        //console.log(expenses)
 
         const result = []
         for(let exp of expenses){
@@ -313,7 +313,7 @@ class ExpensesController {
         const expenses_categories = await ExpensesCategory.findAll({
             where:{delete:false},
             order:[['name', 'ASC']]});
-        console.log(expenses_categories)
+        //console.log(expenses_categories)
         const result = {};
         for(let expenses_category of expenses_categories){
             var amount = 0;
