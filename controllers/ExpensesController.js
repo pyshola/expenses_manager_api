@@ -37,14 +37,14 @@ class ExpensesController {
             start = moment(new Date().setHours(0,0,0,0)).format()
         }
         else{
-            start = moment(new Date(req.query.start).setHours(0,0,0,0)).format()
+            start = moment(new Date(request.query.start).setHours(0,0,0,0)).format()
         }
 
         if(!end){
             end = moment(new Date().setHours(24,0,0,0)).format()
         }
         else{
-            end = moment(new Date(req.query.end).setHours(24,0,0,0)).format()
+            end = moment(new Date(request.query.end).setHours(24,0,0,0)).format()
         }
         const query = {
             delete:false,
@@ -274,7 +274,7 @@ class ExpensesController {
             "delete":true
         }, {where:{id:exp_info.id}});
 
-        return response.status(204)
+        return response.sendStatus(204);
     }
 
     
@@ -296,45 +296,39 @@ class ExpensesController {
         }
         var {start, end} = request.query;
         if(!start){
-            start = moment(new Date(2000, 1, 1).setHours(0,0,0,0)).format()
+            start = moment(new Date().setHours(0,0,0,0)).format()
         }
         else{
-            start = moment(new Date(req.query.start).setHours(0,0,0,0)).format()
+            start = moment(new Date(request.query.start).setHours(0,0,0,0)).format()
         }
 
         if(!end){
             end = moment(new Date().setHours(24,0,0,0)).format()
         }
         else{
-            end = moment(new Date(req.query.end).setHours(24,0,0,0)).format()
-        }
-        const query = {
-            delete:false,
-            created_at:{ [Op.between]: [start, end] }
+            end = moment(new Date(request.query.end).setHours(24,0,0,0)).format()
         }
         
-        const expenses_categories = await ExpensesCategory.findAll(
-            {where:query, include:[{model:Expenses}]});
         
+        const expenses_categories = await ExpensesCategory.findAll({
+            where:{delete:false},
+            order:[['name', 'ASC']]});
+        console.log(expenses_categories)
         const result = {};
         for(let expenses_category of expenses_categories){
-            
-            if (result[expenses_category.name] === undefined) {
-                var amount = 0;
-                for(let expenses of expenses_category.expenses){
-                    let amt = expenses.amount || 0;
-                    amount = parseFloat(amt) + parseFloat(amount);
-                }
-                result[expenses_category.name] = amount;
+            var amount = 0;
+            let query = {
+                delete:false,
+                expensescategoryId:expenses_category.id,
+                created_at:{ [Op.between]: [start, end] }
             }
-            else{
-                var amount = result[expenses_category.name];
-                for(let expenses of expenses_category.expenses){
-                    let amt = expenses.amount || 0;
-                    amount = parseFloat(amt) + parseFloat(amount);
-                }
-                result[expenses_category.name] = amount;
+            const expenses = await Expenses.findAll(
+            {where:query});
+            var amount = 0;
+            for(let exp of expenses){
+                amount = parseFloat(exp.amount) + parseFloat(amount);
             }
+            result[expenses_category.name] = amount;
 
         }
         //console.log(result);   

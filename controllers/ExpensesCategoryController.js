@@ -123,6 +123,29 @@ class ExpensesCategoryController {
     }
 
     static async deleteExpensesCategory(request, response){
+        const currentUser = await getCurrentUser(request);
+        if (!currentUser) {
+            return response.status(401).json({
+              error: 'Unauthorized',
+            });
+        }
+        const exp_f = await ExpensesCategory.findOne({where:{
+            "id":request.params.id, "delete":false
+        }});
+        if(!exp_f){
+            return response.status(400).json({
+                error: 'Not Found!',
+            });
+
+        }
+        await ExpensesCategory.update({
+            "delete":true
+        }, {where:{id:exp_f.id}});   
+        await Expenses.update({
+            "delete":true
+        }, {where:{expensescategoryId:exp_f.id}});   
+
+        return response.sendStatus(204);
 
 
     }
