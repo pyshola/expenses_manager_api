@@ -312,7 +312,7 @@ class ExpensesController {
         
         
         const expenses_categories = await ExpensesCategory.findAll({
-            where:{delete:false},
+            where:{delete:false,user_id:currentUser.id},
             order:[['name', 'ASC']]});
         //console.log(expenses_categories)
         const result = {};
