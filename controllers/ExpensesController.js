@@ -48,6 +48,7 @@ class ExpensesController {
         }
         const query = {
             delete:false,
+            user_id:currentUser.id
             created_at:{ [Op.between]: [start, end] }
         }
         //console.log(query)
